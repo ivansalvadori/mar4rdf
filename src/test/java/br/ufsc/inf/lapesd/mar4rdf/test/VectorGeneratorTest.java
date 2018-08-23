@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.riot.Lang;
 import org.junit.Test;
 
 import br.ufsc.inf.lapesd.mar4rdf.RDFFileReader;
@@ -15,7 +16,7 @@ public class VectorGeneratorTest {
 	@Test
 	public void VectorGenerationTest() throws IOException {
 		VectorGenerator vg = new VectorGenerator();
-		Model model = new RDFFileReader().read(new File("input.rdf"));
+		Model model = new RDFFileReader().read(new File("input.rdf"), Lang.NTRIPLES);
 		List<List<Integer>> matrix = vg.generate(model);
 		System.out.println(matrix);
 

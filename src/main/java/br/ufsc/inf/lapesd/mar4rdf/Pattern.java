@@ -2,34 +2,42 @@ package br.ufsc.inf.lapesd.mar4rdf;
 
 import java.util.List;
 
+import org.apache.jena.rdf.model.Property;
+
 public class Pattern {
 
-	private List<String> listOfPropertyName;
+	private List<Property> listOfProperties;
 	private int numberOfTransactions;
-	private String longestCommonName;
 
-	public Pattern(List<String> listOfPropertyName, int numberOfTransactions, String longestCommonName) {
+	public Pattern(List<Property> listOfProperties, int numberOfTransactions) {
 		super();
-		this.listOfPropertyName = listOfPropertyName;
+		this.listOfProperties = listOfProperties;
 		this.numberOfTransactions = numberOfTransactions;
-		this.longestCommonName = longestCommonName;
 	}
 
-	public List<String> getListOfPropertyName() {
-		return listOfPropertyName;
+	public List<Property> getListOfProperties() {
+		return listOfProperties;
 	}
 
 	public int getNumberOfTransactions() {
 		return numberOfTransactions;
 	}
 
-	public String getLongestCommonName() {
-		return longestCommonName;
-	}
-
 	@Override
 	public String toString() {
-		return this.longestCommonName + " -> " + listOfPropertyName.toString() + " -> " + numberOfTransactions;
+		String PaternFormat = "%s -> %s (%s transactions)";
+		return String.format(PaternFormat, getPropertyURI(), listOfProperties, numberOfTransactions);
+
+	}
+
+	public String getPropertyURI() {
+		String propertyName = StringUtils.createPropertyName(this.getListOfProperties());
+		return propertyName;
+	}
+
+	public String getTypeURI() {
+		String uri = StringUtils.createTypeURI(this.getListOfProperties());
+		return uri;
 	}
 
 }

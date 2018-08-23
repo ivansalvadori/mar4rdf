@@ -1,23 +1,31 @@
 package br.ufsc.inf.lapesd.mar4rdf;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.jena.rdf.model.Property;
 
 public class StringUtils {
 
-	public static String patternName(List<String> propertyNames) {
-		String longestCommonPrefix = longestCommonPrefix(propertyNames);
+	public static String createPropertyName(List<Property> properties) {
+		List<String> propertyURIs = new ArrayList<>();
+		for (Property property : properties) {
+			propertyURIs.add(property.getURI());
+		}
+
+		String longestCommonPrefix = longestCommonPrefix(propertyURIs);
 		String patternName = "has";
-		for (String string : propertyNames) {
+		for (String string : propertyURIs) {
 			patternName = patternName + string + "And";
 		}
 		patternName = patternName.substring(0, patternName.length() - 3);
 		patternName = patternName.replace(longestCommonPrefix, "");
 
-		String s0 = propertyNames.get(0).replace(longestCommonPrefix, "");
-		String s1 = propertyNames.get(1).replace(longestCommonPrefix, "");
+		String s0 = propertyURIs.get(0).replace(longestCommonPrefix, "");
+		String s1 = propertyURIs.get(1).replace(longestCommonPrefix, "");
 		String longestSubstring = longestSubstring(s0, s1);
 
-		if (!longestSubstring.isEmpty()) {
+		if (!longestSubstring.isEmpty() && longestSubstring.length() >= 3) {
 			patternName = longestCommonPrefix + "has" + longestSubstring;
 		}
 
@@ -25,7 +33,59 @@ public class StringUtils {
 
 	}
 
-	public static String longestCommonPrefix(List<String> strings) {
+	public static String createTypeSufix(List<Property> properties) {
+		List<String> propertyURIs = new ArrayList<>();
+		for (Property property : properties) {
+			propertyURIs.add(property.getURI());
+		}
+
+		String longestCommonPrefix = longestCommonPrefix(propertyURIs);
+		String typeSufix = "";
+		for (String string : propertyURIs) {
+			typeSufix = typeSufix + string + "And";
+		}
+		typeSufix = typeSufix.substring(0, typeSufix.length() - 3);
+		typeSufix = typeSufix.replace(longestCommonPrefix, "");
+
+		String s0 = propertyURIs.get(0).replace(longestCommonPrefix, "");
+		String s1 = propertyURIs.get(1).replace(longestCommonPrefix, "");
+		String longestSubstring = longestSubstring(s0, s1);
+
+		if (!longestSubstring.isEmpty() && longestSubstring.length() >= 3) {
+			typeSufix = longestSubstring;
+		}
+
+		return typeSufix;
+
+	}
+
+	public static String createTypeURI(List<Property> properties) {
+		List<String> propertyURIs = new ArrayList<>();
+		for (Property property : properties) {
+			propertyURIs.add(property.getURI());
+		}
+
+		String longestCommonPrefix = longestCommonPrefix(propertyURIs);
+		String typeSufix = "";
+		for (String string : propertyURIs) {
+			typeSufix = typeSufix + string + "And";
+		}
+		typeSufix = typeSufix.substring(0, typeSufix.length() - 3);
+		typeSufix = typeSufix.replace(longestCommonPrefix, "");
+
+		String s0 = propertyURIs.get(0).replace(longestCommonPrefix, "");
+		String s1 = propertyURIs.get(1).replace(longestCommonPrefix, "");
+		String longestSubstring = longestSubstring(s0, s1);
+
+		if (!longestSubstring.isEmpty() && longestSubstring.length() >= 3) {
+			typeSufix = longestCommonPrefix + longestSubstring;
+		}
+
+		return typeSufix;
+
+	}
+
+	private static String longestCommonPrefix(List<String> strings) {
 		if (strings.size() == 0) {
 			return ""; // Or maybe return null?
 		}

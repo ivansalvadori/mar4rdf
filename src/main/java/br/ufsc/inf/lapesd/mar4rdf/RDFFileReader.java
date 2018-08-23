@@ -16,9 +16,8 @@ import org.apache.jena.riot.Lang;
 public class RDFFileReader {
 
 	private Charset rdfCharset = StandardCharsets.UTF_8;
-	private Lang rdfLang = Lang.NTRIPLES;
 
-	public Model read(File file) {
+	public Model read(File file, Lang lang) {
 		String modelString = null;
 		Model model = ModelFactory.createOntologyModel(OntModelSpec.OWL_LITE_MEM);
 		try {
@@ -27,7 +26,7 @@ public class RDFFileReader {
 			return model;
 		}
 
-		model.read(new StringReader(modelString), null, this.rdfLang.getName());
+		model.read(new StringReader(modelString), null, lang.getName());
 		return model;
 	}
 
