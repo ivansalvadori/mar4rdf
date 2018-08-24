@@ -35,6 +35,11 @@ public class Pattern {
 		return propertyName;
 	}
 
+	public String getInversePropertyURI() {
+		String propertyName = StringUtils.createInversePropertyName(this.getListOfProperties());
+		return propertyName;
+	}
+
 	public String getTypeURI() {
 		String uri = StringUtils.createTypeURI(this.getListOfProperties());
 		return uri;

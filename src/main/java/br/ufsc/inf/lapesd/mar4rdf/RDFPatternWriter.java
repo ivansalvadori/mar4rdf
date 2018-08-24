@@ -52,6 +52,7 @@ public class RDFPatternWriter {
 						newResource.addProperty(property, object);
 					}
 				}
+				newResource.addProperty(ResourceFactory.createProperty(pattern.getInversePropertyURI()), subject);
 				subject.addProperty(ResourceFactory.createProperty(pattern.getPropertyURI()), newResource);
 			}
 		}

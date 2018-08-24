@@ -33,6 +33,31 @@ public class StringUtils {
 
 	}
 
+	public static String createInversePropertyName(List<Property> properties) {
+		List<String> propertyURIs = new ArrayList<>();
+		for (Property property : properties) {
+			propertyURIs.add(property.getURI());
+		}
+
+		String longestCommonPrefix = longestCommonPrefix(propertyURIs);
+		String patternName = "is";
+		for (String string : propertyURIs) {
+			patternName = patternName + string + "And";
+		}
+		patternName = patternName.substring(0, patternName.length() - 3);
+		patternName = patternName.replace(longestCommonPrefix, "");
+
+		String s0 = propertyURIs.get(0).replace(longestCommonPrefix, "");
+		String s1 = propertyURIs.get(1).replace(longestCommonPrefix, "");
+		String longestSubstring = longestSubstring(s0, s1);
+
+		if (!longestSubstring.isEmpty() && longestSubstring.length() >= 3) {
+			patternName = longestCommonPrefix + "is" + longestSubstring + "Of";
+		}
+
+		return patternName;
+	}
+
 	public static String createTypeSufix(List<Property> properties) {
 		List<String> propertyURIs = new ArrayList<>();
 		for (Property property : properties) {
@@ -56,7 +81,6 @@ public class StringUtils {
 		}
 
 		return typeSufix;
-
 	}
 
 	public static String createTypeURI(List<Property> properties) {
@@ -80,9 +104,7 @@ public class StringUtils {
 		if (!longestSubstring.isEmpty() && longestSubstring.length() >= 3) {
 			typeSufix = longestCommonPrefix + longestSubstring;
 		}
-
 		return typeSufix;
-
 	}
 
 	private static String longestCommonPrefix(List<String> strings) {
@@ -140,7 +162,6 @@ public class StringUtils {
 				}
 			}
 		}
-
 		return sb.toString();
 	}
 
