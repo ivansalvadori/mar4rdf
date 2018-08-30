@@ -2,6 +2,7 @@ package br.ufsc.inf.lapesd.mar4rdf;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,12 @@ public class Mining {
 		apriori.setShowTransactionIdentifiers(true);
 		Model model = new RDFFileReader().read(new File(rdfFilepath), lang);
 
-		double treshhold = 0.00;
-		double currentminsupp = 1.0;
-		while (currentminsupp >= treshhold) {
+		BigDecimal treshhold = new BigDecimal("0.00");
+		BigDecimal currentminsupp = new BigDecimal("1.00");
+		BigDecimal subFactor = new BigDecimal("0.005");
+
+		while (currentminsupp.compareTo(treshhold) > 0) {
+			System.out.println("currentminsupp: " + currentminsupp);
 			List<List<Integer>> matrix = vectorGenerator.generate(model);
 
 			TransactionDatabase db = new TransactionDatabase();
@@ -35,11 +39,16 @@ public class Mining {
 				db.addTransaction(vector);
 			}
 
-			Itemsets assocRules = apriori.runAlgorithm(db, currentminsupp, null);
+			Itemsets assocRules = apriori.runAlgorithm(db, currentminsupp.doubleValue(), null);
 			List<Pattern> patterns = this.processAssocRules(assocRules, model);
 			listOfPatterns.addAll(patterns);
-			currentminsupp = currentminsupp - 0.001;
+			currentminsupp = currentminsupp.subtract(subFactor);
+			if (!patterns.isEmpty()) {
+				System.out.println("currentminsupp: " + currentminsupp);
+				System.out.println(patterns);
+			}
 		}
+
 		return listOfPatterns;
 	}
 

@@ -15,10 +15,10 @@ public class MiningTest {
 	@Test
 	public void minigTest() throws IOException {
 		Mining mining = new Mining();
-		List<Pattern> patterns = mining.findPatterns("D:\\Desenvolvimento\\eclipse-workspace\\csv2rdf\\rdf\\output_0a17b506-5c84-4301-af9b-e6c269c5f69e.ntriples", Lang.NTRIPLES);
+		List<Pattern> patterns = mining.findPatterns("D:\\Desenvolvimento\\eclipse-workspace\\csv2rdf\\rdf\\output_d42e9f3a-0fe9-4281-8dae-e26e762e1799.ntriples", Lang.NTRIPLES);
 		RDFPatternWriter rdfPatternWriter = new RDFPatternWriter();
 		rdfPatternWriter.setResourceDomain("http://pagamentos.gov.br/");
-		rdfPatternWriter.write(patterns, "D:\\Desenvolvimento\\eclipse-workspace\\csv2rdf\\rdf\\output_0a17b506-5c84-4301-af9b-e6c269c5f69e.ntriples", Lang.NTRIPLES);
+		rdfPatternWriter.write(patterns, "D:\\Desenvolvimento\\eclipse-workspace\\csv2rdf\\rdf\\output_d42e9f3a-0fe9-4281-8dae-e26e762e1799.ntriples", Lang.NTRIPLES);
 		System.out.println(patterns);
 	}
 }

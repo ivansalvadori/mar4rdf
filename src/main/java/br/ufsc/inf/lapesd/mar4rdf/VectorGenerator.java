@@ -3,6 +3,7 @@ package br.ufsc.inf.lapesd.mar4rdf;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,7 @@ public class VectorGenerator {
 	private Integer currentVectorNumber = 0;
 	private Map<Integer, Resource> mapVectorIDResource = new HashMap<>();
 	private Integer currentVectorID = 0;
+	private List<List<String>> matrixOfValues = new ArrayList<>();
 
 	public List<List<Integer>> generate(Model model) throws FileNotFoundException, IOException {
 		List<List<Integer>> matrix = new ArrayList<>();
@@ -31,9 +33,13 @@ public class VectorGenerator {
 		List<Resource> listOfSubjects = model.listSubjects().toList();
 		for (Resource subject : listOfSubjects) {
 			List<Integer> vector = new ArrayList<>();
+			List<String> values = new ArrayList<>();
 
 			for (Property predicate : predicates) {
 				Statement stmt = subject.getProperty(predicate);
+				if (stmt == null) {
+					continue;
+				}
 				RDFNode object = stmt.getObject();
 				if (object.isLiteral()) {
 					String objectValue = object.asLiteral().toString();
@@ -44,11 +50,13 @@ public class VectorGenerator {
 						currentVectorNumber++;
 					}
 					vector.add(this.mapStringNumber.get(objectValue));
+					values.add(objectValue);
 				}
 
 			}
-
+			Collections.sort(vector);
 			matrix.add(vector);
+			this.matrixOfValues.add(values);
 			this.mapVectorIDResource.put(this.currentVectorID++, subject);
 		}
 
@@ -95,5 +103,9 @@ public class VectorGenerator {
 			}
 		}
 		return null;
+	}
+
+	public List<List<String>> getMatrixOfValues() {
+		return matrixOfValues;
 	}
 }
