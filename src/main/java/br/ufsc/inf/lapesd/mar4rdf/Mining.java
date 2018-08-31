@@ -28,7 +28,7 @@ public class Mining {
 
 		BigDecimal treshhold = new BigDecimal("0.00");
 		BigDecimal currentminsupp = new BigDecimal("1.00");
-		BigDecimal subFactor = new BigDecimal("0.005");
+		BigDecimal subFactor = new BigDecimal("0.001");
 
 		while (currentminsupp.compareTo(treshhold) > 0) {
 			System.out.println("currentminsupp: " + currentminsupp);

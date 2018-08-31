@@ -1,0 +1,33 @@
+
+<http://www.pagamentos.gov.br/2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontoloy/Employee> .
+<http://www.pagamentos.gov.br/2> <http://ontoloy/employeeName> "Alice" .
+<http://www.pagamentos.gov.br/2> <http://ontoloy/employeeSecNumber> "123" .
+<http://www.pagamentos.gov.br/2> <http://ontoloy/employeeBirthDate> "01/01/1950" .
+<http://www.pagamentos.gov.br/2> <http://ontoloy/companyName> "Void Corporation" .
+<http://www.pagamentos.gov.br/2> <http://ontoloy/companyLocation> "Atlanta" .
+<http://www.pagamentos.gov.br/2> <http://ontoloy/salary> "2000" .
+<http://www.pagamentos.gov.br/2> <http://ontoloy/admissionDate> "01/01/2018" .
+
+
+<http://www.pagamentos.gov.br/3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontoloy/Employee> .
+<http://www.pagamentos.gov.br/3> <http://ontoloy/employeeName> "John" .
+<http://www.pagamentos.gov.br/3> <http://ontoloy/employeeSecNumber> "456" .
+<http://www.pagamentos.gov.br/3> <http://ontoloy/employeeBirthDate> "01/02/1950" .
+<http://www.pagamentos.gov.br/3> <http://ontoloy/companyName> "Void Corporation" .
+<http://www.pagamentos.gov.br/3> <http://ontoloy/companyLocation> "Atlanta" .
+<http://www.pagamentos.gov.br/3> <http://ontoloy/salary> "1000" .
+<http://www.pagamentos.gov.br/3> <http://ontoloy/admissionDate> "01/01/2018" .
+
+
+<http://www.pagamentos.gov.br/1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ontoloy/Employee> .
+<http://www.pagamentos.gov.br/1> <http://ontoloy/employeeName> "Bob" .
+<http://www.pagamentos.gov.br/1> <http://ontoloy/employeeSecNumber> "789" .
+<http://www.pagamentos.gov.br/1> <http://ontoloy/employeeBirthDate> "01/03/1950" .
+<http://www.pagamentos.gov.br/1> <http://ontoloy/companyName> "Acme Corporation." .
+<http://www.pagamentos.gov.br/1> <http://ontoloy/companyLocation> "New York" .
+<http://www.pagamentos.gov.br/1> <http://ontoloy/salary> "1000" .
+<http://www.pagamentos.gov.br/1> <http://ontoloy/admissionDate> "01/01/2018" .
+
+
+
+

@@ -52,10 +52,10 @@ public class StringUtils {
 		String longestSubstring = longestSubstring(s0, s1);
 
 		if (!longestSubstring.isEmpty() && longestSubstring.length() >= 3) {
-			patternName = longestCommonPrefix + "is" + longestSubstring + "Of";
+			patternName = longestCommonPrefix + "is" + longestSubstring;
 		}
 
-		return patternName;
+		return patternName + "Of";
 	}
 
 	public static String createTypeSufix(List<Property> properties) {
